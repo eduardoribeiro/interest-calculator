@@ -8,25 +8,51 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import ReposList from 'components/ReposList';
+import Slider from 'react-rangeslider';
+import 'react-rangeslider/lib/index.css';
 import './style.scss';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
    * when initial state username is not null, submit the form to load repos
    */
+
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      horizontal: 10
+    };
+  }
+
   componentDidMount() {
     if (this.props.username && this.props.username.trim().length > 0) {
       this.props.onSubmitForm();
     }
   }
 
+  handleChangeHorizontal = (value) => {
+    this.setState({
+      horizontal: value
+    });
+  };
+
   render() {
-    const { loading, error, repos } = this.props;
-    const reposListProps = {
+    // const { loading, error, repos } = this.props;
+    /* const reposListProps = {
       loading,
       error,
       repos,
+    }; */
+
+    const { horizontal } = this.state;
+    const horizontalLabels = {
+      0: 'Low',
+      50: 'Medium',
+      100: 'High'
     };
+
+    const formatMoney = (value) => `${value} €`;
+    /* const formatPc = (p) => `${p }%`; */
 
     return (
       <article>
@@ -36,12 +62,11 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
         </Helmet>
         <div className="home-page">
           <section className="centered">
-            <h2>Start your next react project in seconds</h2>
-            <p>A minimal <i>React-Redux</i> boilerplate with all the best practices</p>
+            <h2>Need a loan?</h2>
+            <p>Simple estimate your loan interests and total amount due</p>
           </section>
-          <section>
-            <h2>Try me!</h2>
-            <form onSubmit={this.props.onSubmitForm}>
+          <section className="calculator">
+            {/* <form onSubmit={this.props.onSubmitForm}>
               <label htmlFor="username">
               Show Github repositories by
                 <span className="at-prefix">@</span>
@@ -54,7 +79,20 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                 />
               </label>
             </form>
-            <ReposList {...reposListProps} />
+            <ReposList {...reposListProps} /> */}
+            <div className="calculator-interface">
+              <h2>{formatMoney(horizontal)}</h2>
+              <Slider
+                className=""
+                min={0}
+                max={100}
+                value={horizontal}
+                labels={horizontalLabels}
+                format={formatMoney}
+                handleLabel={horizontal}
+                onChange={this.handleChangeHorizontal}
+              />
+            </div>
           </section>
         </div>
       </article>
