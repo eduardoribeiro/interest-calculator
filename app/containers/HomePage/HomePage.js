@@ -5,9 +5,10 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import ReposList from 'components/ReposList';
+import LoanTerms from 'components/LoanTerms';
+/* import ReposList from 'components/ReposList'; */
 import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css';
 import './style.scss';
@@ -20,14 +21,14 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
   constructor(props, context) {
     super(props, context);
     this.state = {
-      horizontal: 10
+      horizontal: 100
     };
   }
 
   componentDidMount() {
-    if (this.props.username && this.props.username.trim().length > 0) {
+    /* if (this.props.username && this.props.username.trim().length > 0) {
       this.props.onSubmitForm();
-    }
+    } */
   }
 
   handleChangeHorizontal = (value) => {
@@ -45,10 +46,15 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
     }; */
 
     const { horizontal } = this.state;
+    const values = {
+      min: 100,
+      max: 2000,
+      step: 100
+    };
     const horizontalLabels = {
-      0: 'Low',
-      50: 'Medium',
-      100: 'High'
+      100: '100€',
+      1000: '1000€',
+      2000: '2000€'
     };
 
     const formatMoney = (value) => `${value} €`;
@@ -81,17 +87,24 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
             </form>
             <ReposList {...reposListProps} /> */}
             <div className="calculator-interface">
-              <h2>{formatMoney(horizontal)}</h2>
-              <Slider
-                className=""
-                min={0}
-                max={100}
-                value={horizontal}
-                labels={horizontalLabels}
-                format={formatMoney}
-                handleLabel={horizontal}
-                onChange={this.handleChangeHorizontal}
-              />
+              <h2>Simulate your loan</h2>
+              <div className="loan-amount">
+                <h2 className="amout">{formatMoney(horizontal)}</h2>
+                <h3 className="inner-title">Amount required</h3>
+                <Slider
+                  min={values.min}
+                  max={values.max}
+                  step={values.step}
+                  value={horizontal}
+                  format={formatMoney}
+                  labels={horizontalLabels}
+                  onChange={this.handleChangeHorizontal}
+                />
+              </div>
+              <div className="loan-term">
+                <h3 className="inner-title">The following terms are available</h3>
+                <LoanTerms amount={horizontal} />
+              </div>
             </div>
           </section>
         </div>
@@ -100,17 +113,17 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
   }
 }
 
-HomePage.propTypes = {
+/* HomePage.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.bool,
   ]),
-  repos: PropTypes.oneOfType([
+  loanTerms: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.bool,
   ]),
   onSubmitForm: PropTypes.func,
   username: PropTypes.string,
   onChangeUsername: PropTypes.func,
-};
+}; */

@@ -5,21 +5,21 @@ body {
 }
 
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Monteserrat', Helvetica, Arial, sans-serif;
 }
 
 body.fontLoaded {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Monteserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 #app {
-  background-color: #fafafa;
+  background-color: rgb(7,38,59);
   min-height: 100%;
   min-width: 100%;
 }
 
 p,
 label {
-  font-family: Georgia, Times, 'Times New Roman', serif;
+  font-weight: 300;
   line-height: 1.5em;
 }
