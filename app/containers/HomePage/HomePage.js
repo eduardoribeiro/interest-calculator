@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import LoanTerms from 'components/LoanTerms';
 /* import ReposList from 'components/ReposList'; */
@@ -21,7 +21,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
   constructor(props, context) {
     super(props, context);
     this.state = {
-      horizontal: 100
+      loanAmount: 100
     };
   }
 
@@ -31,11 +31,11 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
     } */
   }
 
-  handleChangeHorizontal = (value) => {
+  /* handleChangeHorizontal = (value) => {
     this.setState({
-      horizontal: value
+      loanAmount: value
     });
-  };
+  }; */
 
   render() {
     // const { loading, error, repos } = this.props;
@@ -45,7 +45,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
       repos,
     }; */
 
-    const { horizontal } = this.state;
+    const { loanAmount } = this.state;
     const values = {
       min: 100,
       max: 2000,
@@ -89,21 +89,21 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
             <div className="calculator-interface">
               <h2>Simulate your loan</h2>
               <div className="loan-amount">
-                <h2 className="amout">{formatMoney(horizontal)}</h2>
+                <h2 className="amout">{formatMoney(loanAmount)}</h2>
                 <h3 className="inner-title">Amount required</h3>
                 <Slider
                   min={values.min}
                   max={values.max}
                   step={values.step}
-                  value={horizontal}
+                  value={loanAmount}
                   format={formatMoney}
                   labels={horizontalLabels}
-                  onChange={this.handleChangeHorizontal}
+                  onChange={this.props.onChangeValue}
                 />
               </div>
               <div className="loan-term">
                 <h3 className="inner-title">The following terms are available</h3>
-                <LoanTerms amount={horizontal} />
+                <LoanTerms amount={loanAmount} />
               </div>
             </div>
           </section>
@@ -113,17 +113,8 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
   }
 }
 
-/* HomePage.propTypes = {
+HomePage.propTypes = {
   loading: PropTypes.bool,
-  error: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.bool,
-  ]),
-  loanTerms: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.bool,
-  ]),
-  onSubmitForm: PropTypes.func,
-  username: PropTypes.string,
-  onChangeUsername: PropTypes.func,
-}; */
+  loanAmount: PropTypes.string,
+  onChangeValue: PropTypes.func,
+};

@@ -10,14 +10,14 @@ import ListItem from 'components/ListItem';
 import { IssueIcon } from 'components/Icons';
 import './style.scss';
 
-export default class RepoListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class LoanListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     const { item } = this.props;
     let nameprefix = '';
 
     // If the repository is owned by a different person than we got the data for
     // it's a fork and we should show the name of the owner
-    if (item.owner.login !== this.props.currentUser) {
+    if (item.owner.login !== this.props.value) {
       nameprefix = `${item.owner.login}/`;
     }
 
@@ -45,7 +45,7 @@ export default class RepoListItem extends React.PureComponent { // eslint-disabl
   }
 }
 
-RepoListItem.propTypes = {
+LoanListItem.propTypes = {
   item: PropTypes.object,
-  currentUser: PropTypes.string,
+  value: PropTypes.string,
 };

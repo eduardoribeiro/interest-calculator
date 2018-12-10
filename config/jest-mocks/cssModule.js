@@ -1,1 +1,1 @@
-module.exports = 'CSS_MODULE';
+export default 'CSS_MODULE';

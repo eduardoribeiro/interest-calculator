@@ -8,9 +8,9 @@ const selectGlobal = (state) => state.get('global');
 
 const selectRoute = (state) => state.get('route');
 
-const makeSelectCurrentUser = () => createSelector(
+const makeSelectLoanValue = () => createSelector(
   selectGlobal,
-  (globalState) => globalState.get('currentUser')
+  (globalState) => globalState.get('value')
 );
 
 const makeSelectLoading = () => createSelector(
@@ -35,7 +35,7 @@ const makeSelectLocation = () => createSelector(
 
 export {
   selectGlobal,
-  makeSelectCurrentUser,
+  makeSelectLoanValue,
   makeSelectLoading,
   makeSelectError,
   makeSelectRepos,
